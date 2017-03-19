@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>抽奖练习</title>
+</head>
+<style type="text/css">
+body,img,ul,li{margin:0;padding:0;}
+body{
+	background: url(img/background.jpg);
+	background-size: 1366px;
+}
+#wrap{
+	width:480px;
+	height: 450px;
+    margin: 80px;
+    background-color: rgba(0,0,0,0.1);
+}
+ul{
+	width: 360px;
+	height: 380px;
+	padding-top: 35px;
+	margin-left:70px;
+}
+li{
+	width: 100px;
+	height: 120px;
+	list-style: none;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	float: left;
+}
+
+</style>
+<script type="text/javascript" src="jquery-1.10.1.min.js"></script>
+<body>
+	<div id="wrap">
+		<ul>
+			<li><img src="img/charing.png" /></li>
+			<li><img src="img/jade.png" /></li>
+			<li><img src="img/loneliness.png" /></li>
+			<li><img src="img/ordinary.png" /></li>
+			<li><img src="img/cj.png" /></li>
+			<li><img src="img/pride.png" /></li>
+			<li><img src="img/shadow.png" /></li>
+			<li><img src="img/suns.png" /></li>
+			<li><img src="img/whiteNight.png" /></li>
+		</ul>
+	</div>
+
+<script type="text/javascript">
+	$(function (){
+		
+		var oldImg = null;
+		var arr = [0,1,2,3,5,6,7,8];
+		var arrText = ['查令十字街86号','穆斯林的葬礼','你的孤独，虽败犹荣','平凡的世界','','傲慢与偏见','偷影子的人','灿烂千阳','白夜行'];
+		$('img').eq(4).click(function(){
+			clearInterval(timer);
+			if(!oldImg) {
+				$src = $("img").eq(0).attr('src');
+				oldImg = $("img").eq(0);
+				$("img").eq(0).attr('src','img/zjl.png');
+			}
+			var timer = null;
+			var t = 2000;
+			num = 0;
+			timer = setInterval(function(){
+				t -= 200;
+				if(t == 0) {
+					alert("恭喜你获得《"+ arrText[ arr[num]] + '》' );
+					clearInterval( timer );
+					oldImg.attr('src',$src);
+				}else{	//不写else 会出现问题
+					num = Math.round( Math.random()*7 );
+					oldImg.attr('src',$src);
+					oldImg = $('img').eq(arr[num]);
+					$src= oldImg.attr('src');
+					oldImg.attr('src','img/zjl.png');
+				}
+			},200);
+		});
+
+	});
+</script>
+</body>
+</html>
